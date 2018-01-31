@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using OliversPieShop.Models;
 
 namespace OliversPieShop
 {
@@ -17,6 +18,8 @@ namespace OliversPieShop
         public void ConfigureServices(IServiceCollection services)
         {
             //a.i: added addmvc 
+            services.AddTransient<ICategoryRepository, MockCategoryRepository>();
+            services.AddTransient<IPieRepository, MockPieRepository>();
             services.AddMvc();
         }
 
