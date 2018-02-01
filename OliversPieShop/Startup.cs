@@ -34,8 +34,12 @@ namespace OliversPieShop
                                          options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
 
             //a.i: added addmvc 
-            services.AddTransient<ICategoryRepository, MockCategoryRepository>();
-            services.AddTransient<IPieRepository, MockPieRepository>();
+
+            //services.AddTransient<ICategoryRepository, MockCategoryRepository>();
+            //services.AddTransient<IPieRepository, MockPieRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IPieRepository, PieRepository>();
+
             services.AddMvc();
         }
 
