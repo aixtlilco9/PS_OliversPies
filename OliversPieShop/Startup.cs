@@ -28,7 +28,7 @@ namespace OliversPieShop
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options =>
                                          options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
@@ -41,6 +41,14 @@ namespace OliversPieShop
             services.AddTransient<IPieRepository, PieRepository>();
 
             services.AddMvc();
+
+            // Build the intermediate service provider
+            var serviceProvider = services.BuildServiceProvider();
+
+            //resolve implementations
+            var dbContext = serviceProvider.GetService<AppDbContext>();
+
+            return serviceProvider;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +58,8 @@ namespace OliversPieShop
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
+
+            DbInitializer.Seed(app);
 
             
         }
