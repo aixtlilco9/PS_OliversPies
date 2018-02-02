@@ -26,7 +26,7 @@ namespace OliversPieShop.Controllers
         {
             PiesListViewModel piesListViewModel = new PiesListViewModel();
             piesListViewModel.Pies = _pieRepository.Pies;
-            piesListViewModel.CurrentCategory = "bacon bits";
+            piesListViewModel.CurrentCategory = "bacon bitz2";
 
             return View(piesListViewModel);
         }

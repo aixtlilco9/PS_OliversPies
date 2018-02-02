@@ -13,7 +13,7 @@ namespace OliversPieShop.Models
 
         }
 
-        public DbSet<Category> Categories { get; set; }
         public DbSet<Pie> Pies { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
