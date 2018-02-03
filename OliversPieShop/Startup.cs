@@ -40,7 +40,13 @@ namespace OliversPieShop
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IPieRepository, PieRepository>();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
+
             services.AddMvc();
+
+            services.AddMemoryCache();
+            services.AddSession();
 
             // Build the intermediate service provider
             var serviceProvider = services.BuildServiceProvider();
@@ -57,6 +63,7 @@ namespace OliversPieShop
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();//needs t ogo before usemvcwithDefault
             app.UseMvcWithDefaultRoute();
 
             DbInitializer.Seed(app);
