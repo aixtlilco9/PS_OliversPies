@@ -22,7 +22,10 @@ namespace OliversPieShop.Components
         {
             //all code in here gets called automatically upon partial view being called
 
-            var items = _shoppingCart.GetShoppingCartItems();
+            //below line is commented so ock items can be added to db
+            //var items = _shoppingCart.GetShoppingCartItems();
+
+            var items = new List<ShoppingCartItem>() { new ShoppingCartItem(), new ShoppingCartItem() };
             _shoppingCart.ShoppingCartItems = items;
 
             var shoppingCartViewModel = new ShoppingCartViewModel
