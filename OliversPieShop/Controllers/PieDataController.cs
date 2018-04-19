@@ -26,9 +26,10 @@ namespace OliversPieShop.Controllers
             IEnumerable<Pie> dbPies = null;
 
             dbPies = _pieRepository.Pies.OrderBy(p => p.PieId).Take(10);
+
             List<PieViewModel> pies = new List<PieViewModel>();
 
-            foreach(var dbPie in dbPies)
+            foreach (var dbPie in dbPies)
             {
                 pies.Add(MapDbPieToPieViewModel(dbPie));
             }
