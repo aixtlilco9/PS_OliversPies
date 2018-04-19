@@ -26,7 +26,7 @@ namespace OliversPieShop.Controllers
         {
             IEnumerable<Pie> pies;
             string currentCategory = string.Empty;
-
+            //if statement can check for null or (null || = "all pies")
             if (string.IsNullOrEmpty(category))
             {
                 pies = _pieRepository.Pies.OrderBy(p => p.PieId);

@@ -5,31 +5,45 @@
     {
         @Html.Partial("PieOverviewSummary", pie)
     }*@
-@model PiesListViewModel
-<div id="pieDiv">
 
+@model PiesListViewModel
+
+<div id="pieDiv">
 
 </div>
 
 @section scripts{
 
-    <script>
+<script>
 
         $(document).ready(function () {
-            LoadMorePies();
+            LoadMorePiesNext("@Model.CurrentCategory");
         });
 
         $(window).scroll(function () {
-            if ($(window).scrollTop() == $(document).height() - $(window).height()) {
-                LoadMorePies();
+            //below was OG if
+            //if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+            if ($(window).scrollTop() + 1 >= $(document).height() - $(window).height()) {
+            LoadMorePiesNext("@Model.CurrentCategory");
             }
         });
 
-        function LoadMorePies() {
+        //from chenglabs g.h
+        // closure function for paging loadmorepies
+        var LoadMorePiesNext = (function () {
+            var counter = 0;
+            return function (category) {
+                LoadMorePies(category, counter);
+                return counter += 1;
+            }
+        })();
+
+            function LoadMorePies(category, pageCounter) {
 
             $.ajax({
                 type: 'GET',
-                url: '/api/PieData',
+                //url: '/api/PieData',
+                url: '/api/PieData/' + category + '/' + pageCounter,
                 dataType: 'json',
                 success: function (jsonData) {
                     if (jsonData == null) {
@@ -37,7 +51,8 @@
                         return;
                     }
 
-                    $.each(jsonData, function (index, pie) {
+                    $.each(jsonData,
+                        function (index, pie) {
 
                         var PieSummarString = '<div class="col-sm-4 col-lg-4 col-md-4"> ' +
                             '  <div class="thumbnail">' +
@@ -66,6 +81,6 @@
             });
             return false;
         }
-    </script>
+</script>
 
 }
