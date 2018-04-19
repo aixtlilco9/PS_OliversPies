@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using OliversPieShop.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace OliversPieShop
 {
@@ -32,7 +33,7 @@ namespace OliversPieShop
         {
             services.AddDbContext<AppDbContext>(options =>
                                          options.UseSqlServer(_configurationRoot.GetConnectionString("DefaultConnection")));
-
+            services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
             //a.i: added addmvc 
 
             //services.AddTransient<ICategoryRepository, MockCategoryRepository>();
@@ -67,6 +68,7 @@ namespace OliversPieShop
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();//needs to go before usemvcwithDefault
+            app.UseIdentity();
 
             //app.UseMvcWithDefaultRoute();
             app.UseMvc(routes =>
