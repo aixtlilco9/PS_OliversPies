@@ -68,8 +68,9 @@ namespace OliversPieShop
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();//needs to go before usemvcwithDefault
-            app.UseIdentity();
 
+            app.UseIdentity();//for soemreasonchenglabs had this commented as obsolete and had the following line below
+            //app.UseAuthentication();
             //app.UseMvcWithDefaultRoute();
             app.UseMvc(routes =>
             {

@@ -247,6 +247,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFilesEx" Version="1.0.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.0.0" />
